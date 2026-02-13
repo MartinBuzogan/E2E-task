@@ -1,0 +1,31 @@
+{
+  "name": "zadanie",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx wdio run wdio.conf.js",
+    "test:sequential": "npx wdio run wdio.sequential.conf.js",
+    "test:us1": "npx wdio run wdio.conf.js --spec test/specs/us1-registration.spec.js",
+    "test:us2": "npx wdio run wdio.conf.js --spec test/specs/us2-authentication.spec.js",
+    "test:us3": "npx wdio run wdio.conf.js --spec test/specs/us3-browse-plans.spec.js",
+    "test:us4": "npx wdio run wdio.conf.js --spec test/specs/us4-reservation.spec.js",
+    "test:us5": "npx wdio run wdio.conf.js --spec test/specs/us5-profile-management.spec.js",
+    "test:us6": "npx wdio run wdio.conf.js --spec test/specs/us6-session-management.spec.js",
+    "report": "node generate-report.js",
+    "report:open": "start \"\" \"%cd%\\reports\\html-report\\report.html\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.24.0",
+    "@wdio/cli": "^9.24.0",
+    "@wdio/json-reporter": "^9.20.0",
+    "@wdio/local-runner": "^9.24.0",
+    "@wdio/mocha-framework": "^9.24.0",
+    "@wdio/spec-reporter": "^9.24.0",
+    "allure-commandline": "^2.32.0",
+    "wdio-html-nice-reporter": "^8.1.7"
+  }
+}

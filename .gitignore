@@ -1,0 +1,11 @@
+node_modules/
+allure-results/
+allure-report/
+reports/
+*.log
+.DS_Store
+
+# Environment variables (API keys)
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,19 @@
+{
+  "name": "task5-api-tests",
+  "version": "1.0.0",
+  "description": "Backend API tests - Google Books API & bonus creative API test",
+  "scripts": {
+    "test": "jest --verbose --runInBand",
+    "test:books": "jest --verbose --runInBand googleBooks",
+    "test:OpenLib": "jest --verbose --runInBand OpenLibrary"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.0"
+  }
+}
