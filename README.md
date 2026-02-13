@@ -41,7 +41,7 @@ npm test
 ```
 
 ### Run Tests Sequentially
-Execute all tests one at a time (slower but more stable):
+Execute all tests one at a time with GUI:
 ```bash
 npm run test:sequential
 ```
