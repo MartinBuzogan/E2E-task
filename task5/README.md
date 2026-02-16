@@ -44,14 +44,8 @@ npm install
 ```
 
 ## API Key Configuration (Google Books)
-
-Google Books API supports calls without an API key for basic queries, but this task requires authorization using an API KEY.
-
 ### Getting an API Key:
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project (or select an existing one)
-3. Enable **Books API** in APIs & Services → Library
-4. Create an API key in APIs & Services → Credentials
 
 ### Setting Up the Key:
 
@@ -64,11 +58,6 @@ cp .env.example .env
 ```
 GOOGLE_BOOKS_API_KEY=your-actual-api-key
 ```
-
-> ⚠️ **Important:** The `.env` file is in `.gitignore` and will not be committed to the repository. Never share your API key!
-
-> **Note:** Tests work without an API key (Google Books API allows it for simple queries), but it's recommended to set the key to meet the task requirements.
-
 ## Running Tests
 
 ### All tests

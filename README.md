@@ -15,7 +15,7 @@ node --version
 
 ### Required Software
 - **Browser:** Google Chrome (default), Microsoft Edge, or Mozilla Firefox
-- **Operating System:** Windows (tested), macOS, or Linux
+- **Operating System:** Windows (tested)
 
 ## Installation
 
@@ -34,10 +34,6 @@ This will install all required packages including:
 
 ## Running Tests
 
-### Browser Selection
-
-Tests default to **Google Chrome**. You can run tests on a different browser using the dedicated npm scripts or the `BROWSER` environment variable.
-
 **Using npm scripts:**
 ```bash
 npm run test:chrome    # Google Chrome (default)
@@ -51,7 +47,7 @@ npm test
 ```
 
 ### Run Tests Sequentially
-Execute all tests one at a time (slower but more stable):
+Execute all tests one at a time with GUI:
 ```bash
 npm run test:sequential
 ```
@@ -95,33 +91,10 @@ A detailed HTML report with visual representation of test results using wdio-htm
 ```bash
 npm run report:open
 ```
-
-Or manually open the file in your browser:
-- Windows: `start reports/html-report/report.html`
-- macOS: `open reports/html-report/report.html`
-- Linux: `xdg-open reports/html-report/report.html`
-
-
-### 3. JSON Report
-Raw test data in JSON format for programmatic processing.
-
-**Location:** `reports/json/wdio-results-*.json`
-
 **To generate the summary report:**
 ```bash
 npm run report
 ```
-
-**Location:** `reports/test-summary.txt`
-
-The summary report includes:
-- **Total number of tests executed**
-- **Number of passed tests** (with percentage)
-- **Number of failed tests** (with percentage)
-- **Execution time**
-- **Detailed list of all tests** with their status
-- **Complete failure messages** with stack traces for failed tests
-
 
 ## Project Structure
 
