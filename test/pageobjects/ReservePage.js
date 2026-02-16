@@ -21,7 +21,10 @@ class ReservePage extends BasePage {
 
     async switchToReserveWindow() {
         logger.info('Switching to reservation window');
-        await browser.pause(2000);
+        await browser.waitUntil(
+            async () => (await browser.getWindowHandles()).length > 1,
+            { timeout: 10000, timeoutMsg: 'Reservation window did not open within 10 seconds' }
+        );
         const handles = await browser.getWindowHandles();
         await browser.switchToWindow(handles[handles.length - 1]);
         await this.inputDate.waitForDisplayed({ timeout: 10000 });

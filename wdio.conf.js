@@ -2,6 +2,35 @@ const { cleanupBrowser } = require('./test/helpers/cleanup');
 const logger = require('./test/helpers/logger');
 const { ReportAggregator } = require('wdio-html-nice-reporter');
 
+const selectedBrowser = (process.env.BROWSER || 'chrome').toLowerCase();
+
+function getBrowserCapabilities(browser) {
+    switch (browser) {
+        case 'firefox':
+            return {
+                browserName: 'firefox',
+                'moz:firefoxOptions': {
+                    args: ['--headless', '--width=1920', '--height=1080']
+                }
+            };
+        case 'edge':
+            return {
+                browserName: 'MicrosoftEdge',
+                'ms:edgeOptions': {
+                    args: ['--headless', '--disable-gpu', '--window-size=1920,1080', '--no-sandbox']
+                }
+            };
+        case 'chrome':
+        default:
+            return {
+                browserName: 'chrome',
+                'goog:chromeOptions': {
+                    args: ['--headless', '--disable-gpu', '--window-size=1920,1080', '--no-sandbox']
+                }
+            };
+    }
+}
+
 exports.config = {
     runner: 'local',
 
@@ -9,12 +38,7 @@ exports.config = {
 
     maxInstances: 4,
 
-    capabilities: [{
-        browserName: 'MicrosoftEdge',
-        'ms:edgeOptions': {
-            args: ['--headless', '--disable-gpu', '--window-size=1920,1080', '--no-sandbox']
-        }
-    }],
+    capabilities: [getBrowserCapabilities(selectedBrowser)],
 
     logLevel: 'warn',
     bail: 0,

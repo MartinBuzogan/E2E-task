@@ -43,11 +43,19 @@ describe('US4 - Make a Hotel Reservation', () => {
 
         logger.step(9, 'Set contact information');
         await ReservePage.setContact('email');
-        await browser.pause(500);
+        const emailInput = await $('#email');
+        await emailInput.waitForDisplayed({ timeout: 5000 });
         await ReservePage.setEmail(user.email);
 
         logger.step(10, 'Verify total bill is calculated');
-        await browser.pause(1000);
+        const totalBillEl = await $('#total-bill');
+        await browser.waitUntil(
+            async () => {
+                const text = await totalBillEl.getText();
+                return text !== '' && text !== '$0';
+            },
+            { timeout: 10000, timeoutMsg: 'Total bill was not calculated' }
+        );
         const totalBill = await ReservePage.getTotalBill();
         expect(totalBill).not.toBe('');
 
@@ -110,7 +118,13 @@ describe('US4 - Make a Hotel Reservation', () => {
         await ReservePage.submit();
 
         logger.step(8, 'Verify validation error for head count');
-        await browser.pause(500);
+        await browser.waitUntil(
+            async () => {
+                const msg = await ReservePage.getHeadCountValidationError();
+                return msg !== '';
+            },
+            { timeout: 5000, timeoutMsg: 'Validation error for head count did not appear' }
+        );
         const validationError = await ReservePage.getHeadCountValidationError();
         expect(validationError).not.toBe('');
 

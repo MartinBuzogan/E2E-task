@@ -14,7 +14,7 @@ node --version
 ```
 
 ### Required Software
-- **Browser:** Microsoft Edge (tests run in headless mode)
+- **Browser:** Google Chrome (default), Microsoft Edge, or Mozilla Firefox
 - **Operating System:** Windows (tested), macOS, or Linux
 
 ## Installation
@@ -30,12 +30,22 @@ This will install all required packages including:
 - WebdriverIO test framework
 - Mocha test runner
 - HTML and JSON reporters
-- Edge browser driver
+- Browser drivers (auto-downloaded for Chrome, Edge, and Firefox)
 
 ## Running Tests
 
+### Browser Selection
+
+Tests default to **Google Chrome**. You can run tests on a different browser using the dedicated npm scripts or the `BROWSER` environment variable.
+
+**Using npm scripts:**
+```bash
+npm run test:chrome    # Google Chrome (default)
+npm run test:firefox   # Mozilla Firefox
+npm run test:edge      # Microsoft Edge
+```
 ### Run All Tests
-Execute all test suites in parallel:
+Execute all test suites in parallel (uses Chrome by default):
 ```bash
 npm test
 ```
@@ -47,7 +57,7 @@ npm run test:sequential
 ```
 
 ### Run Individual Test Suites
-Execute specific test suites:
+Execute specific test suites (these also respect the `BROWSER` environment variable):
 
 ```bash
 # User Story 1: Registration

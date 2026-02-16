@@ -8,16 +8,16 @@ class PlansPage extends BasePage {
 
     async waitForPlansToLoad() {
         logger.info('Waiting for plans to load...');
-        // Wait for the dynamic plan list to populate
         await browser.waitUntil(
             async () => {
                 const cards = await $$('.card');
-                return cards.length > 0;
+                const prevCount = cards.length;
+                await browser.pause(500);
+                const newCards = await $$('.card');
+                return newCards.length === prevCount && newCards.length > 0;
             },
-            { timeout: 15000, timeoutMsg: 'Plans did not load within 15 seconds' }
+            { timeout: 15000, timeoutMsg: 'Async plans did not finish loading within 15 seconds' }
         );
-        // Wait for async (Today's Deals) plans to finish loading
-        await browser.pause(3000);
     }
 
     async getAllPlanNames() {

@@ -4,6 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npx wdio run wdio.conf.js",
+    "test:chrome": "set BROWSER=chrome&& npx wdio run wdio.conf.js",
+    "test:firefox": "set BROWSER=firefox&& npx wdio run wdio.conf.js",
+    "test:edge": "set BROWSER=edge&& npx wdio run wdio.conf.js",
     "test:sequential": "npx wdio run wdio.sequential.conf.js",
     "test:us1": "npx wdio run wdio.conf.js --spec test/specs/us1-registration.spec.js",
     "test:us2": "npx wdio run wdio.conf.js --spec test/specs/us2-authentication.spec.js",

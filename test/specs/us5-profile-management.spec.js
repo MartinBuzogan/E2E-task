@@ -58,7 +58,8 @@ describe('US5 - Manage User Profile', () => {
         await IconPage.uploadIcon('./test-assets/test-icon.png');
 
         logger.step(6, 'Submit icon form');
-        await browser.pause(1000);
+        const submitBtn = await $('#icon-form button[type="submit"]');
+        await submitBtn.waitForClickable({ timeout: 5000 });
         await IconPage.submit();
 
         logger.step(7, 'Verify redirected back to My Page');
@@ -69,7 +70,8 @@ describe('US5 - Manage User Profile', () => {
 
         logger.step(8, 'Verify icon persistence after page refresh');
         await browser.refresh();
-        await browser.pause(1000);
+        const emailEl = await $('#email');
+        await emailEl.waitForDisplayed({ timeout: 10000 });
         const profile = await MyPage.getProfileData();
         expect(profile.email).toBe(testData.iconUser.email);
     });
@@ -115,7 +117,12 @@ describe('US5 - Manage User Profile', () => {
         logger.step(8, 'Verify deleted account cannot login');
         await LoginPage.open();
         await LoginPage.login(testData.deleteUser.email, testData.deleteUser.password);
-        await browser.pause(1000);
+        const emailMsg = await $('#email-message');
+        const passwordMsg = await $('#password-message');
+        await browser.waitUntil(
+            async () => (await emailMsg.isDisplayed()) || (await passwordMsg.isDisplayed()),
+            { timeout: 5000, timeoutMsg: 'Error message did not appear after login with deleted account' }
+        );
         const errorMsg = await LoginPage.getErrorMessage();
         expect(errorMsg).toContain('Email or password is invalid');
     });

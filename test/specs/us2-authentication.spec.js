@@ -41,7 +41,12 @@ describe('US2 - User Authentication', () => {
         await LoginPage.login('wronguser@example.com', 'wrongpassword');
 
         logger.step(3, 'Verify error message is displayed');
-        await browser.pause(1000);
+        const emailMsg = await $('#email-message');
+        const passwordMsg = await $('#password-message');
+        await browser.waitUntil(
+            async () => (await emailMsg.isDisplayed()) || (await passwordMsg.isDisplayed()),
+            { timeout: 5000, timeoutMsg: 'Error message did not appear after invalid login' }
+        );
         const errorMsg = await LoginPage.getErrorMessage();
         expect(errorMsg).toContain('Email or password is invalid');
 

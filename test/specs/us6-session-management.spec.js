@@ -60,7 +60,8 @@ describe('US6 - Session Management and Logout', () => {
 
         logger.step(3, 'Refresh the page');
         await browser.refresh();
-        await browser.pause(1000);
+        const logoutForm = await $('#logout-form');
+        await logoutForm.waitForDisplayed({ timeout: 10000 });
         isLoggedIn = await PlansPage.isLoggedIn();
         expect(isLoggedIn).toBe(true);
 
@@ -101,7 +102,13 @@ describe('US6 - Session Management and Logout', () => {
 
         logger.step(4, 'Attempt to access My Page directly');
         await MyPage.open();
-        await browser.pause(2000);
+        await browser.waitUntil(
+            async () => {
+                const readyState = await browser.execute(() => document.readyState);
+                return readyState === 'complete';
+            },
+            { timeout: 10000 }
+        );
 
         logger.step(5, 'Verify no personal user data is displayed');
         const url = await browser.getUrl();
